@@ -1,6 +1,9 @@
 :root {
   --heading-font: Inter, sans-serif;
   --body-font: Inter, sans-serif;
+  --electric-brand: #00d2a0;
+  --electric-teal: #00d2a0;
+  --electric-teal-muted: rgba(0, 210, 160, 0.12);
 }
 
 body {
@@ -29,7 +32,47 @@ body {
   gap: 8px;
 }
 
-:root {
-  --electric-brand: #d0bcff;
-  --electric-teal: #00d2a0;
+/* Todo item transitions */
+.todo-item {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.todo-item:hover {
+  transform: translateX(2px);
+}
+
+.todo-item--completed {
+  opacity: 0.6;
+}
+
+/* Progress bar */
+.progress-bar-track {
+  height: 3px;
+  background: var(--gray-4);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--electric-teal);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--electric-teal);
+}
+
+/* Teal focus ring on text input */
+.rt-TextFieldInput:focus {
+  outline: 2px solid var(--electric-teal) !important;
+  outline-offset: -1px;
+}
+
+/* Add button teal override */
+.add-button {
+  background: var(--electric-teal) !important;
+  color: #0a1a14 !important;
+}
+
+.add-button:hover:not(:disabled) {
+  filter: brightness(1.08);
 }

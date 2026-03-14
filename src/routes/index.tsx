@@ -92,18 +92,31 @@ function TodoPage() {
 		<Container size="2" py="6">
 			<Flex direction="column" gap="5">
 				{/* Header */}
-				<Flex justify="between" align="center">
-					<Flex direction="column" gap="1">
-						<Heading size="7">Todos</Heading>
-						<Text size="2" color="gray">
-							{activeTodos.length} task{activeTodos.length !== 1 ? "s" : ""}{" "}
-							remaining
-						</Text>
+				<Flex direction="column" gap="3">
+					<Flex justify="between" align="center">
+						<Flex direction="column" gap="1">
+							<Heading size="7">My tasks</Heading>
+							<Text size="2" color="gray">
+								{activeTodos.length === 0 && allTodos.length > 0
+									? "All done — nice work!"
+									: `${activeTodos.length} task${activeTodos.length !== 1 ? "s" : ""} remaining`}
+							</Text>
+						</Flex>
+						{completedTodos.length > 0 && (
+							<Badge color="teal" variant="soft" size="2">
+								{completedTodos.length} done
+							</Badge>
+						)}
 					</Flex>
-					{completedTodos.length > 0 && (
-						<Badge color="green" variant="soft" size="2">
-							{completedTodos.length} done
-						</Badge>
+					{allTodos.length > 0 && (
+						<div className="progress-bar-track">
+							<div
+								className="progress-bar-fill"
+								style={{
+									width: `${Math.round((completedTodos.length / allTodos.length) * 100)}%`,
+								}}
+							/>
+						</div>
 					)}
 				</Flex>
 
@@ -117,7 +130,12 @@ function TodoPage() {
 						style={{ flex: 1 }}
 						size="3"
 					/>
-					<Button size="3" onClick={handleAdd} disabled={!newTitle.trim()}>
+					<Button
+						size="3"
+						onClick={handleAdd}
+						disabled={!newTitle.trim()}
+						className="add-button"
+					>
 						<Plus size={16} />
 						Add
 					</Button>
@@ -130,7 +148,7 @@ function TodoPage() {
 							<Button
 								key={f}
 								variant={filter === f ? "solid" : "ghost"}
-								color={filter === f ? "violet" : "gray"}
+								color={filter === f ? "teal" : "gray"}
 								size="2"
 								onClick={() => setFilter(f)}
 								style={{ textTransform: "capitalize" }}
@@ -171,7 +189,16 @@ function TodoPage() {
 				) : (
 					<Flex direction="column" gap="2">
 						{displayed.map((todo) => (
-							<Card key={todo.id} variant="surface">
+							<Card
+								key={todo.id}
+								variant="surface"
+								className={`todo-item${todo.completed ? " todo-item--completed" : ""}`}
+								style={{
+									borderLeft: todo.completed
+										? "2px solid var(--gray-5)"
+										: "2px solid var(--electric-teal)",
+								}}
+							>
 								<Flex align="center" gap="3">
 									<Checkbox
 										checked={todo.completed}
@@ -179,6 +206,7 @@ function TodoPage() {
 											handleToggle(todo.id, todo.completed)
 										}
 										size="3"
+										color="teal"
 									/>
 									<Text
 										size="3"
