@@ -16,5 +16,11 @@ export const todoInsertSchema = createInsertSchema(todos, {
 	updated_at: dateSchema,
 });
 
+export const todoPatchSchema = z.object({
+	title: z.string().min(1),
+	completed: z.boolean(),
+});
+
 export type Todo = z.infer<typeof todoSelectSchema>;
 export type NewTodo = z.infer<typeof todoInsertSchema>;
+export type TodoPatch = z.infer<typeof todoPatchSchema>;
