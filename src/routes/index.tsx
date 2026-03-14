@@ -109,7 +109,16 @@ function TodoPage() {
 						)}
 					</Flex>
 					{allTodos.length > 0 && (
-						<div className="progress-bar-track">
+						<div
+							className="progress-bar-track"
+							role="progressbar"
+							aria-valuenow={Math.round(
+								(completedTodos.length / allTodos.length) * 100,
+							)}
+							aria-valuemin={0}
+							aria-valuemax={100}
+							aria-label="Task completion progress"
+						>
 							<div
 								className="progress-bar-fill"
 								style={{

@@ -61,6 +61,21 @@ body {
   box-shadow: 0 0 8px var(--electric-teal);
 }
 
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .todo-item {
+    transition: none;
+  }
+
+  .todo-item:hover {
+    transform: none;
+  }
+
+  .progress-bar-fill {
+    transition: none;
+  }
+}
+
 /* Teal focus ring on text input */
 .rt-TextFieldInput:focus {
   outline: 2px solid var(--electric-teal) !important;

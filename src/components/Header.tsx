@@ -9,6 +9,7 @@ export function Header() {
 				<Link to="/" style={{ textDecoration: "none" }}>
 					<Flex align="center" gap="2">
 						<span
+							aria-hidden="true"
 							style={{
 								display: "inline-block",
 								width: 8,
