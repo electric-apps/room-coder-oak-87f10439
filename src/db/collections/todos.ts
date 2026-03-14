@@ -25,6 +25,7 @@ export const todosCollection = createCollection(
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(newTodo),
 			});
+			if (!res.ok) throw new Error(`Insert failed: ${res.status}`);
 			const data = await res.json();
 			return { txid: data.txid };
 		},
@@ -35,6 +36,7 @@ export const todosCollection = createCollection(
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(updated),
 			});
+			if (!res.ok) throw new Error(`Update failed: ${res.status}`);
 			const data = await res.json();
 			return { txid: data.txid };
 		},
@@ -43,6 +45,7 @@ export const todosCollection = createCollection(
 			const res = await fetch(`/api/mutations/todos/${deleted.id}`, {
 				method: "DELETE",
 			});
+			if (!res.ok) throw new Error(`Delete failed: ${res.status}`);
 			const data = await res.json();
 			return { txid: data.txid };
 		},

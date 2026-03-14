@@ -63,9 +63,9 @@ function TodoPage() {
 		setNewTitle("");
 	};
 
-	const handleToggle = (id: string, completed: boolean) => {
+	const handleToggle = (id: string) => {
 		todosCollection.update(id, (draft) => {
-			draft.completed = !completed;
+			draft.completed = !draft.completed;
 			draft.updated_at = new Date();
 		});
 	};
@@ -203,7 +203,7 @@ function TodoPage() {
 									<Checkbox
 										checked={todo.completed}
 										onCheckedChange={() =>
-											handleToggle(todo.id, todo.completed)
+											handleToggle(todo.id)
 										}
 										size="3"
 										color="teal"

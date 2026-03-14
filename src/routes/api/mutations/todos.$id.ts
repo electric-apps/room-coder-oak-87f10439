@@ -16,7 +16,7 @@ export const Route = createFileRoute("/api/mutations/todos/$id")({
 						.set({
 							title: body.title,
 							completed: body.completed,
-							updated_at: new Date(),
+							updated_at: body.updated_at instanceof Date ? body.updated_at : new Date(),
 						})
 						.where(eq(todos.id, params.id));
 					txid = await generateTxId(tx);
